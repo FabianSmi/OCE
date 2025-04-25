@@ -1,22 +1,28 @@
+using TMPro;
 using UnityEngine;
 
 public class UI_Manager : MonoBehaviour
 {
     static public UI_Manager Instance;
 
+    [SerializeField] TextMeshProUGUI HP;
 
-    void Start()
+    private void Awake()
     {
-        
+        if (Instance is not null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
     }
 
-    void Update()
+    public void SetHpBar(float newhp)
     {
-        
-    }
-
-    public void SetHpBar()
-    {
-
+        HP.text = $"{newhp} HP";
     }
 }
