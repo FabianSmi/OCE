@@ -1,0 +1,79 @@
+using UnityEngine;
+
+public class PlayerHealth : MonoBehaviour
+{
+    [Header("Health Settings")]
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float currentHealt;
+
+    // Gibt zurück, ob Spieler noch Leben hat oder nicht
+    private bool isAlive = true;
+
+
+    private void Start()
+    {
+        currentHealt = maxHealth;
+    }
+
+
+    /// <summary>
+    /// Getter für das Leben.
+    /// </summary>
+    /// <returns>Das aktuelle Leben</returns>
+    public float GetCurrentHealth()
+    {
+        return currentHealt;
+    }
+
+
+
+    /// <summary>
+    /// Setter für das Leben.
+    /// </summary>
+    /// <param name="_newHealth"></param>
+    /// <returns>Das aktuelle Leben.</returns>
+    public float SetCurrentHealth(float _newHealth)
+    {
+        currentHealt = _newHealth;
+        return currentHealt;
+    }
+
+
+    /// <summary>
+    /// Fügt dem Spieler Schaden zu.
+    /// </summary>
+    /// <param name="_damage">Höhe des Schadens.</param>
+    /// <returns>Gibt das aktuelle Leben zurück.</returns>
+    public float TakeDamage(float _damage)
+    {
+        if (isAlive)
+        {
+            currentHealt -= _damage;
+            if (currentHealt <= 0)
+            {
+                currentHealt = 0;
+                isAlive = false;
+            }
+        }
+
+        // hier UI_Manager Text setzen
+
+        return currentHealt;
+    }
+
+    /// <summary>
+    /// Fügt dem Spieler Leben hinzu.
+    /// </summary>
+    /// <param name="_amount">Höhe des Lebens, das hinzugefügt werden soll.</param>
+    /// <returns>Gibt das aktuelle Leben zurück.</returns>
+    public float IncreaseHealth(float _amount)
+    {
+        currentHealt += _amount;
+        if (currentHealt > maxHealth)
+            currentHealt = maxHealth;
+
+        // hier UI_Manager Text setzen
+
+        return currentHealt;
+    }
+}
