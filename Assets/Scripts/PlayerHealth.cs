@@ -1,3 +1,4 @@
+using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -13,6 +14,9 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         currentHealt = maxHealth;
+
+        UI_Manager.Instance.SetHpBar(currentHealt);
+        //todo: Hier irgendwas machen
     }
 
 
@@ -56,7 +60,7 @@ public class PlayerHealth : MonoBehaviour
             }
         }
 
-        // hier UI_Manager Text setzen
+        UI_Manager.Instance.SetHpBar(currentHealt);
 
         return currentHealt;
     }
@@ -72,7 +76,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealt > maxHealth)
             currentHealt = maxHealth;
 
-        // hier UI_Manager Text setzen
+        UI_Manager.Instance.SetHpBar(currentHealt);
 
         return currentHealt;
     }

@@ -14,6 +14,8 @@ public class Teleport : MonoBehaviour
         other.transform.position = new Vector3(otherTeleportObject.transform.position.x, other.transform.position.y, otherTeleportObject.transform.position.z);
 
             otherTeleportObject.GetComponent<Teleport>().triggered =true;
+            var playerHealth = other.GetComponent<PlayerHealth>();
+            playerHealth.TakeDamage(15f);
         }
     }
     private void OnTriggerExit(Collider other)
